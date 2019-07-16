@@ -1,0 +1,84 @@
+<!-- Home component container -->
+<div class="col-12 pad-0 float-left home-result-container">
+  <!-- Space image container -->
+  <div class="col-12 pad-0 space-image-container">
+    <!-- Center div contianer -->
+    <div class="col-10 margin-center">
+      <!-- Grey background -->
+      <div class="col-12 my-4 float-left opac">
+        <!-- Help king shan paragraph -->
+        <p class="text-center font-weight-bold pt-4">
+          Help King Shan in finding Al Falcone by selecting the 4 planets and
+          the vehicles to reach them.
+        </p>
+        <!-- Selectors container -->
+        <div class="col-12 float-left mt-4">
+          <!-- select planet zero and mode of transport -->
+          <div
+            id="planetShipInstance[0]"
+            class="col-lg-3 col-md-6 col-12 float-left"
+            *ngIf="displayPlanetShipSelector[0]"
+          >
+            <app-planet-ship-selector
+              [planetInstance]="planetShipInstance[0]"
+              (displayNextInstance)="displayNextSelector($event)"
+            ></app-planet-ship-selector>
+          </div>
+          <!-- select planet zero and mode of transport ends-->
+
+          <!-- select planet one and mode of transport -->
+          <div
+            id="planetShipInstance[1]"
+            class="col-lg-3 col-md-6 col-12 float-left"
+            *ngIf="displayPlanetShipSelector[1]"
+            #scroll
+          >
+            <app-planet-ship-selector
+              [planetInstance]="planetShipInstance[1]"
+              (displayNextInstance)="displayNextSelector($event)"
+            ></app-planet-ship-selector>
+          </div>
+          <!-- select planet one and mode of transport ends-->
+
+          <!-- select planet two and mode of transport -->
+          <div
+            id="planetShipInstance[2]"
+            class="col-lg-3 col-md-6 col-12 float-left"
+            *ngIf="displayPlanetShipSelector[2]"
+          >
+            <app-planet-ship-selector
+              [planetInstance]="planetShipInstance[2]"
+              (displayNextInstance)="displayNextSelector($event)"
+            ></app-planet-ship-selector>
+          </div>
+          <!-- select planet two and mode of transport ends-->
+
+          <!-- select planet three and mode of transport -->
+          <div
+            id="planetShipInstance[3]"
+            class="col-lg-3 col-md-6 col-12 float-left"
+            *ngIf="displayPlanetShipSelector[3]"
+          >
+            <app-planet-ship-selector
+              [planetInstance]="planetShipInstance[3]"
+              (displayNextInstance)="displayNextSelector($event)"
+            ></app-planet-ship-selector>
+          </div>
+          <!-- select planet three and mode of transport ends-->
+        </div>
+        <div class="col-12 float-left text-center pb-3">
+          <button
+            (click)="launchVehicles()"
+            mat-raised-button
+            color="accent"
+            [disabled]="disableLaunchButton"
+            class="col-4"
+          >
+            Launch
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>

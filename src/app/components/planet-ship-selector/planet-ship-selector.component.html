@@ -1,0 +1,80 @@
+<form
+  autocomplete="off"
+  novalidate
+  *ngIf="!dataAvailable"
+  #formDirective="ngForm"
+  (ngSubmit)="createOwner(ownerForm.value)"
+>
+  <mat-form-field>
+    <input
+      type="text"
+      placeholder="Enter a planet name"
+      aria-label="Number"
+      matInput
+      [formControl]="planetAutoComplete"
+      [matAutocomplete]="auto"
+    />
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      autoActiveFirstOption
+      (optionSelected)="planetSelection($event)"
+    >
+      <mat-option
+        *ngFor="let option of filteredOptions | async"
+        [value]="option"
+        [disabled]="disableCheck(option)"
+      >
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-radio-group
+    [formControl]="vehicle"
+    (change)="vehicleSelected($event)"
+    style="display:flex;flex-direction:column;"
+    aria-label="Select an option"
+    id="planetInstance"
+  >
+    <mat-radio-button
+      id="{{ planetInstance }}_pod_0"
+      [disabled]="disableVehicleCount(allVehicles.pod, 0)"
+      value="{{ planetInstance }}_pod_0"
+      >Space pod ({{ allVehicles.pod }})</mat-radio-button
+    >
+    <mat-radio-button
+      id="{{ planetInstance }}_rocket_1"
+      value="{{ planetInstance }}_rocket_1"
+      [disabled]="disableVehicleCount(allVehicles.rocket, 1)"
+      >Space rocket ({{ allVehicles.rocket }})</mat-radio-button
+    >
+    <mat-radio-button
+      id="{{ planetInstance }}_shuttle_2"
+      value="{{ planetInstance }}_shuttle_2"
+      [disabled]="disableVehicleCount(allVehicles.shuttle, 2)"
+      >Space shuttle ({{ allVehicles.shuttle }})</mat-radio-button
+    >
+    <mat-radio-button
+      id="{{ planetInstance }}_ship_3"
+      value="{{ planetInstance }}_ship_3"
+      [disabled]="disableVehicleCount(allVehicles.ship, 3)"
+      >Space ship ({{ allVehicles.ship }})</mat-radio-button
+    >
+  </mat-radio-group>
+  <table [class.hide]="!(vehicleSpeed && timeTaken)" class="table table-sm table-dark col-10 ">
+    <tr>
+      <th>vehicle speed</th>
+      <td>{{ vehicleSpeed }}</td>
+    </tr>
+    <tr>
+      <th>Time taken</th>
+      <td>{{ timeTaken }}</td>
+    </tr>
+  </table>
+</form>
+<mat-spinner
+  *ngIf="dataAvailable"
+  class="spinner"
+  strokeWidth="3"
+  [diameter]="50"
+></mat-spinner>
