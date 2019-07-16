@@ -1,0 +1,42 @@
+<!-- Result component container -->
+<div class="col-12 pad-0 float-left home-result-container">
+  <!-- Space image container -->
+  <div class="col-12 pad-0 float-left space-image-container">
+    <!-- Center div contianer -->
+    <div class="col-10 margin-center">
+      <!-- Grey background and if planet found-->
+      <!--  -->
+      <div
+        class="col-12 float-left my-4 opac opac-planet-padding"
+        *ngIf="planetFound"
+      >
+        <div class="col-12 text-center">
+          <p class="font-weight-bold text-center text-success lead">
+            Success! Congratulations on Finding Falcone. King Shan is mighty
+            pleased.
+          </p>
+          <p class="font-weight-bold text-center text-success">
+            Planet found: {{ planetFound }}
+          </p>
+          <p class="font-weight-bold text-center text-success">
+            Time Taken: {{ timeTaken }}
+          </p>
+          <button color="primary" mat-raised-button (click)="reset()">
+            Start again
+          </button>
+        </div>
+      </div>
+      <!-- Grey background and if planet not found-->
+      <!--  -->
+      <div class="col-12 float-left text-center my-4 opac opac-padding" *ngIf="!planetFound">
+        <h3 class="font-weight-bold text-center text-danger">
+          Better luck next time
+        </h3>
+        <button color="primary" mat-raised-button (click)="reset()">
+          Start again
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>
