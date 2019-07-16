@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { SelectedPlanets } from '../models/selected-planets.model';
 import { Planets } from '../models/planets.model';
 import { Vehicles } from '../models/vehicles.model';
-import { Router } from '../../../node_modules/@angular/router';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({

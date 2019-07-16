@@ -6,7 +6,6 @@
       name="viewport"
       content="width=device-width,height=device-height,initial-scale=1.0"
     />
-    <!-- <meta http-equiv="ScreenOrientation" content="autoRotate:disabled" /> -->
     <title>FEproblem1</title>
     <base href="/" />
 
@@ -14,15 +13,18 @@
       name="viewport"
       content="width=device-width, initial-scale=1,user-scalable=no"
     />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="./assets/images/geektrust.jpg" />
   </head>
   <body>
     <app-root></app-root>
     <script>
-      window.screen.orientation.addEventListener('orientationchange', function() {
-        console.log(screen.orientation);
-        screen.lockOrientaion('landscape');
-      });
+      window.screen.orientation.addEventListener(
+        'orientationchange',
+        function() {
+          console.log(screen.orientation);
+          screen.lockOrientaion('landscape');
+        }
+      );
     </script>
   </body>
 </html>
