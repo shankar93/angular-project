@@ -1,16 +1,17 @@
 <!-- Result component container -->
-<div class="col-12 pad-0 float-left home-result-container">
+<div class="col-12 pad-0 float-left home-result-container" id="result">
   <!-- Space image container -->
-  <div class="col-12 pad-0 float-left space-image-container">
+  <div class="col-12 pad-0 space-image-container">
     <!-- Center div contianer -->
     <div class="col-10 margin-center">
       <!-- Grey background and if planet found-->
       <!--  -->
       <div
-        class="col-12 float-left my-4 opac opac-planet-padding"
+        id="opac"
+        class="col-12 pad-0 float-left my-4 text-center opac"
         *ngIf="planetFound"
       >
-        <div class="col-12 text-center">
+        <div class="col-12 pad-0" style="position:absolute;top:20%;">
           <p class="font-weight-bold text-center text-success lead">
             Success! Congratulations on Finding Falcone. King Shan is mighty
             pleased.
@@ -28,13 +29,19 @@
       </div>
       <!-- Grey background and if planet not found-->
       <!--  -->
-      <div class="col-12 float-left text-center my-4 opac opac-padding" *ngIf="!planetFound">
-        <h3 class="font-weight-bold text-center text-danger">
-          Better luck next time
-        </h3>
-        <button color="primary" mat-raised-button (click)="reset()">
-          Start again
-        </button>
+      <div
+        id="opac"
+        class="col-12 pad-0 float-left text-center my-4 opac"
+        *ngIf="!planetFound"
+      >
+        <div class="col-12 pad-0" style="position:absolute;top:40%;">
+          <h3 class="font-weight-bold text-center text-danger">
+            Better luck next time
+          </h3>
+          <button color="primary" mat-raised-button (click)="reset()">
+            Start again
+          </button>
+        </div>
       </div>
     </div>
   </div>

@@ -28,11 +28,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           // server-side error
           errorMessage = `Error: The server did not send proper response`;
         }
-        // window.alert(errorMessage);
         this.notifier.show({
           type: 'error',
           message: errorMessage,
-          id: 'THAT_NOTIFICATION_ID' // Again, this is optional
+          id: 'THAT_NOTIFICATION_ID'
         });
         return throwError(errorMessage);
       })

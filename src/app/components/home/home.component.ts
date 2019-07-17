@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DataService } from '../../services/data.service';
@@ -8,7 +8,7 @@ import { DataService } from '../../services/data.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   // Instance number passed to  planet-ship-selector.component
   planetShipInstance: Array<Number> = [0, 1, 2, 3];
   // Boolean value to display next planet-ship-selector.component
@@ -23,6 +23,15 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    window.addEventListener('orientationchange', () => {
+      this.responsive();
+    });
+    window.addEventListener('resize', () => {
+      this.responsive();
+    });
+    window.addEventListener('sizemodechange', () => {
+      this.responsive();
+    });
     console.log('count', this.dataService.homeCountFlag);
     this.dataService.homeCountFlag += 1;
     if (this.dataService.homeCountFlag > 1) {
@@ -30,6 +39,30 @@ export class HomeComponent implements OnInit {
     }
 
     this.vehicleDataFetcher();
+  }
+
+  /* ngAfterViewInit() {
+    // this.dataService.homeElement = document.getElementById('home');
+  } */
+
+  ngAfterViewInit() {
+    this.responsive();
+  }
+
+  responsive() {
+    const header = document.getElementById('header').offsetHeight;
+    const footer = document.getElementById('footer').offsetHeight;
+    const body = document.body.offsetHeight;
+    document.getElementById('home').style.minHeight =
+      body - header - footer + 'px';
+
+    const home = document.getElementById('home').offsetHeight;
+    const opac = document.getElementById('opac');
+    opac.style.minHeight = home - 48 + 'px';
+
+    console.log(
+      'body' + body + 'header' + header + 'footer' + footer + 'home' + home
+    );
   }
 
   // Event recieved from planet-ship-selector.component to dispaly next selector component

@@ -1,12 +1,7 @@
 .height-100 {
   height: 100%;
 }
-.opac {
-  background-color: #cccccc;
-  opacity: 0.9;
-}
-
-.home-result-container {
+/* .home-result-container {
   height: 78.8%;
 }
 .opac-planet-padding {
@@ -14,7 +9,7 @@
 }
 .opac-padding {
   padding: 32% 0;
-}
+} */
 
 /* Small devices (landscape phones, 576px and up) */
 /* @media (min-width: 576px) {
@@ -25,8 +20,7 @@
     padding: 1% 0;
   }
 } */
-/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .home-result-container {
     height: 89%;
   }
@@ -37,7 +31,6 @@
     padding: 64% 0;
   }
 }
-/* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .home-result-container {
     height: 85.3%;
@@ -50,7 +43,6 @@
   }
 }
 
-/* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   .home-result-container {
     height: 80.5%;
@@ -62,3 +54,8 @@
     padding: 16% 0;
   }
 }
+ */
+.home-result-container {
+  // min-height: 89%;
+}
+

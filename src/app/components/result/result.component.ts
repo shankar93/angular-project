@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Vehicles } from '../../models/vehicles.model';
 
@@ -7,13 +7,40 @@ import { Vehicles } from '../../models/vehicles.model';
   templateUrl: './result.component.html',
   styleUrls: ['./result.component.scss']
 })
-export class ResultComponent implements OnInit {
-  constructor(
-    private dataService: DataService
-  ) {}
+export class ResultComponent implements OnInit, AfterViewInit {
+  constructor(private dataService: DataService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    window.addEventListener('orientationchange', () => {
+      this.responsive();
+    });
+    window.addEventListener('resize', () => {
+      this.responsive();
+    });
+    window.addEventListener('sizemodechange', () => {
+      this.responsive();
+    });
+  }
 
+  ngAfterViewInit() {
+    this.responsive();
+  }
+
+  responsive() {
+    const header = document.getElementById('header').offsetHeight;
+    const footer = document.getElementById('footer').offsetHeight;
+    const body = document.body.offsetHeight;
+    document.getElementById('result').style.minHeight =
+      body - header - footer + 'px';
+
+    const result = document.getElementById('result').offsetHeight;
+    const opac = document.getElementById('opac');
+    opac.style.minHeight = result - 48 + 'px';
+
+    console.log(
+      'body' + body + 'header' + header + 'footer' + footer + 'result' + result
+    );
+  }
   get planetFound(): String {
     return this.dataService.planetFound;
   }
