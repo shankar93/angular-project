@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DataService } from '../../services/data.service';
+import { PwaService } from '../../services/pwa.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   constructor(
     private dataService: DataService,
     private spinner: NgxSpinnerService,
-    private router: Router
+    private router: Router,
+    public Pwa: PwaService
   ) {}
 
   ngOnInit() {
@@ -49,6 +51,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.responsive();
   }
 
+  installPwa(): void {
+    this.Pwa.promptEvent.prompt();
+  }
+
+  get promptEvent() {
+    return this.Pwa.promptEvent;
+  }
   responsive() {
     const header = document.getElementById('header').offsetHeight;
     const footer = document.getElementById('footer').offsetHeight;

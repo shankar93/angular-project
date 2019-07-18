@@ -16,6 +16,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ResultComponent } from './components/result/result.component';
 import { PlanetShipSelectorComponent } from './components/planet-ship-selector/planet-ship-selector.component';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const notifierDefaultOptions: NotifierOptions = {
   position: {
@@ -76,7 +78,8 @@ const notifierDefaultOptions: NotifierOptions = {
     AppRoutingModule,
     MaterialModule,
     NgxSpinnerModule,
-    NotifierModule.withConfig(notifierDefaultOptions)
+    NotifierModule.withConfig(notifierDefaultOptions),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     {
