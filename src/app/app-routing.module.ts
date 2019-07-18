@@ -7,8 +7,7 @@ import { AuthGuard } from './guards/auth-guard.service';
 // , resolve: { hnData: HomeResolverService }
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'result', component: ResultComponent },
-  // , canActivate: [AuthGuard]
+  { path: 'result', component: ResultComponent, canActivate: [AuthGuard]},
   { path: '**', redirectTo: 'home', pathMatch: 'full'}
 ];
 

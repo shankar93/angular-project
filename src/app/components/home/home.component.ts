@@ -2,7 +2,6 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DataService } from '../../services/data.service';
-import { PwaService } from '../../services/pwa.service';
 
 @Component({
   selector: 'app-home',
@@ -20,8 +19,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   constructor(
     private dataService: DataService,
     private spinner: NgxSpinnerService,
-    private router: Router,
-    public Pwa: PwaService
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -51,13 +49,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.responsive();
   }
 
-  installPwa(): void {
-    this.Pwa.promptEvent.prompt();
-  }
-
-  get promptEvent() {
-    return this.Pwa.promptEvent;
-  }
   responsive() {
     const header = document.getElementById('header').offsetHeight;
     const footer = document.getElementById('footer').offsetHeight;
@@ -69,9 +60,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     const opac = document.getElementById('opac');
     opac.style.minHeight = home - 48 + 'px';
 
-    console.log(
-      'body' + body + 'header' + header + 'footer' + footer + 'home' + home
-    );
   }
 
   // Event recieved from planet-ship-selector.component to dispaly next selector component

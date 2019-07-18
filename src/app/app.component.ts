@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    // navigates to home component on browser refresh
-    // this.router.navigate(['/home']);
+    // Navigates to home component on browser refresh
+    this.router.navigate(['/home']);
   }
 }
