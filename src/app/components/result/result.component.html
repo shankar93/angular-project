@@ -11,19 +11,18 @@
         class="col-12 pad-0 float-left my-4 text-center opac"
         *ngIf="planetFound"
       >
-        <div class="col-12 pad-0" style="position:absolute;top:20%;">
+        <div class="col-12 pad-0 success-container">
           <p class="font-weight-bold text-center text-success lead">
-            Success! Congratulations on Finding Falcone. King Shan is mighty
-            pleased.
+            {{ staticContent.result.success }}
           </p>
           <p class="font-weight-bold text-center text-success">
-            Planet found: {{ planetFound }}
+            {{ staticContent.result.planetFound }} {{ planetFound }}
           </p>
           <p class="font-weight-bold text-center text-success">
-            Time Taken: {{ timeTaken }}
+            {{ staticContent.result.timeTaken }} {{ timeTaken }}
           </p>
           <button color="primary" mat-raised-button (click)="reset()">
-            Start again
+            {{ staticContent.result.startAgainButton }}
           </button>
         </div>
       </div>
@@ -34,12 +33,12 @@
         class="col-12 pad-0 float-left text-center my-4 opac"
         *ngIf="!planetFound"
       >
-        <div class="col-12 pad-0" style="position:absolute;top:40%;">
+        <div class="col-12 pad-0 failure-contianer">
           <h3 class="font-weight-bold text-center text-danger">
-            Better luck next time
+            {{ staticContent.result.failure }}
           </h3>
           <button color="primary" mat-raised-button (click)="reset()">
-            Start again
+            {{ staticContent.result.startAgainButton }}
           </button>
         </div>
       </div>

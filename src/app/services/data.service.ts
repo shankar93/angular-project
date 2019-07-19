@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { SelectedPlanets } from '../models/selected-planets.model';
 import { Planets } from '../models/planets.model';
 import { Vehicles } from '../models/vehicles.model';
-import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
@@ -47,21 +47,22 @@ export class DataService {
       Pingasor: false
     }
   ];
-  // Behavioral subject to disable selected planets in other dropdowns
-  selectedPlanets = new BehaviorSubject<Array<SelectedPlanets>>(
-    this.selectedPlanetsData
-  );
   // Object with planet names and distances
   planetDistance = {};
   // Object with no of vehicles available
   vehicleCount = {};
-  // Behavioral subject to alter no of vehicles available
-  selectedVehicles = new BehaviorSubject(this.vehicleCount);
+
   //
   vehiclesApiData: Vehicles[];
 
   findFalconeRequestBody = { token: '', planet_names: [], vehicle_names: [] };
 
+  // Behavioral subject to disable selected planets in other dropdowns
+  selectedPlanets = new BehaviorSubject<Array<SelectedPlanets>>(
+    this.selectedPlanetsData
+  );
+  // Behavioral subject to alter no of vehicles available
+  selectedVehicles = new BehaviorSubject(this.vehicleCount);
   getTokenHeaders = {
     headers: new HttpHeaders({
       Accept: 'application/json'

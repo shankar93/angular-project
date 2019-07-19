@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'FEproblem1';
-  constructor(private router: Router) {}
+
+  constructor(private router: Router, private dataService: DataService) {}
 
   ngOnInit() {
     // Navigates to home component on browser refresh

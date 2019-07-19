@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../services/data.service';
+import staticContent from '../../../assets/jsons/staticContent.json';
 
 @Component({
   selector: 'app-footer',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
+  constructor(private dataService: DataService) {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  get staticContent() {
+    return staticContent;
   }
-
 }

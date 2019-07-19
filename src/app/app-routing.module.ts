@@ -3,12 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ResultComponent } from './components/result/result.component';
 import { AuthGuard } from './guards/auth-guard.service';
-// import { HomeResolverService } from './resolvers/home-resolver.service';
-// , resolve: { hnData: HomeResolverService }
+// import { ResolverService } from './resolvers/resolver.service';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'result', component: ResultComponent, canActivate: [AuthGuard]},
-  { path: '**', redirectTo: 'home', pathMatch: 'full'}
+  {
+    path: 'result',
+    component: ResultComponent,
+    canActivate: [AuthGuard]
+  },
+  // ,
+  //   resolve: { products: ResolverService }
+  { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({

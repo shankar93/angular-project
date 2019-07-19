@@ -3,6 +3,8 @@ import { ChangeDetectorRef } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { RadiogroupUtility } from './radiogroup.utility';
 
+import staticContent from '../../../assets/jsons/staticContent.json';
+
 @Component({
   selector: 'app-planet-ship-selector',
   templateUrl: './planet-ship-selector.component.html',
@@ -35,5 +37,9 @@ export class PlanetShipSelectorComponent extends RadiogroupUtility
 
   ngAfterViewChecked() {
     this.cdRef.detectChanges();
+  }
+
+  get staticContent() {
+    return staticContent;
   }
 }

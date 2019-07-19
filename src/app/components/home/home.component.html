@@ -8,8 +8,7 @@
       <div class="col-12 my-4 float-left opac" id="opac">
         <!-- Help king shan paragraph -->
         <p class="text-center font-weight-bold pt-4">
-          Help King Shan in finding Al Falcone by selecting the 4 planets and
-          the vehicles to reach them.
+          {{ staticContent.home.introText }}
         </p>
         <!-- Selectors container -->
         <div class="col-12 float-left mt-4">
@@ -74,7 +73,7 @@
             [disabled]="disableLaunchButton"
             class="col-6"
           >
-            Launch
+          {{ staticContent.home.launchButton }}
           </button>
         </div>
       </div>

@@ -1,14 +1,17 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { NgxSpinnerService } from 'ngx-spinner';
+
 import { DataService } from '../../services/data.service';
+import staticContent from '../../../assets/jsons/staticContent.json';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   // Instance number passed to  planet-ship-selector.component
   planetShipInstance: Array<Number> = [0, 1, 2, 3];
   // Boolean value to display next planet-ship-selector.component
@@ -23,15 +26,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    window.addEventListener('orientationchange', () => {
-      this.responsive();
-    });
-    window.addEventListener('resize', () => {
-      this.responsive();
-    });
-    window.addEventListener('sizemodechange', () => {
-      this.responsive();
-    });
+    window.addEventListener('orientationchange', this.responsive);
+    window.addEventListener('resize', this.responsive);
+    window.addEventListener('sizemodechange', this.responsive);
+
     console.log('count', this.dataService.homeCountFlag);
     this.dataService.homeCountFlag += 1;
     if (this.dataService.homeCountFlag > 1) {
@@ -41,25 +39,33 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.vehicleDataFetcher();
   }
 
-  /* ngAfterViewInit() {
-    // this.dataService.homeElement = document.getElementById('home');
-  } */
-
   ngAfterViewInit() {
     this.responsive();
   }
 
+  ngOnDestroy() {
+    window.removeEventListener('orientationchange', this.responsive);
+    window.removeEventListener('resize', this.responsive);
+    window.removeEventListener('sizemodechange', this.responsive);
+  }
+  get staticContent() {
+    return staticContent;
+  }
   responsive() {
     const header = document.getElementById('header').offsetHeight;
     const footer = document.getElementById('footer').offsetHeight;
     const body = document.body.offsetHeight;
-    document.getElementById('home').style.minHeight =
-      body - header - footer + 'px';
+    const home = document.getElementById('home');
+    if (home) {
+      document.getElementById('home').style.minHeight =
+        body - header - footer + 'px';
+    }
 
-    const home = document.getElementById('home').offsetHeight;
+    const homeHeight = document.getElementById('home').offsetHeight;
     const opac = document.getElementById('opac');
-    opac.style.minHeight = home - 48 + 'px';
-
+    if (opac) {
+      opac.style.minHeight = homeHeight - 48 + 'px';
+    }
   }
 
   // Event recieved from planet-ship-selector.component to dispaly next selector component

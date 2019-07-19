@@ -1,10 +1,10 @@
-footer.page-footer .footer-copyright {
-  background-color: rgba(0,0,0,.2);
-  color: rgba(255,255,255,.6);
-}
-.unique-color-dark {
-  background-color: #1c2331!important;
-}
-.link-color {
-  color: rgb(219, 219, 253);
+footer.page-footer.unique-color-dark {
+  background-color: #1c2331 !important;
+  .footer-copyright {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: rgba(255, 255, 255, 0.6);
+    .link-color {
+      color: rgb(219, 219, 253);
+    }
+  }
 }

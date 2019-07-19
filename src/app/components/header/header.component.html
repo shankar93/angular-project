@@ -1,7 +1,9 @@
 <!-- Header -->
 <nav class="navbar navbar-expand-lg navbar-expand-md bg-info" id="header">
   <!-- brand text -->
-  <a class="navbar-brand text-white font-weight-bold font-size-20">Finding Falcone!</a>
+  <a class="navbar-brand text-white font-weight-bold font-size-20">{{
+    staticContent?.header?.findingFalcon
+  }}</a>
   <!-- brand text ends-->
   <!-- Toggler/collapsibe Button -->
   <button
@@ -17,12 +19,22 @@
   <!-- right-aligned navbar -->
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item text-center" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <a class="nav-link" (click)="reset()">Reset</a>
+      <li
+        class="nav-item text-center"
+        data-toggle="collapse"
+        data-target="#collapsibleNavbar"
+      >
+        <a class="nav-link" (click)="reset()">{{
+          staticContent?.header?.reset
+        }}</a>
       </li>
-      <li class="nav-item dropdown text-center" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <li
+        class="nav-item dropdown text-center"
+        data-toggle="collapse"
+        data-target="#collapsibleNavbar"
+      >
         <a class="nav-link" target="_blank" href="https://www.geektrust.in"
-          >Geek Trust Home</a
+          >{{ staticContent?.header?.geekTrustHome }}</a
         >
       </li>
     </ul>
