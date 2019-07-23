@@ -1,8 +1,5 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-
 import { NgxSpinnerService } from 'ngx-spinner';
-
 import { DataService } from '../../services/data.service';
 import staticContent from '../../../assets/jsons/staticContent.json';
 
@@ -12,56 +9,62 @@ import staticContent from '../../../assets/jsons/staticContent.json';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
-  // Instance number passed to  planet-ship-selector.component
+  // Component instance number passed to  planet-ship-selector.component
   planetShipInstance: Array<Number> = [0, 1, 2, 3];
   // Boolean value to display next planet-ship-selector.component
   displayPlanetShipSelector: Array<Boolean> = [true, false, false, false];
-  // vehicles api data
-  vehiclesApiData: any;
 
   constructor(
     private dataService: DataService,
-    private spinner: NgxSpinnerService,
-    private router: Router
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
+    // Adding event listeners for responsivness
     window.addEventListener('orientationchange', this.responsive);
     window.addEventListener('resize', this.responsive);
     window.addEventListener('sizemodechange', this.responsive);
-
-    console.log('count', this.dataService.homeCountFlag);
+    // Resets the home component on second visit onwards
     this.dataService.homeCountFlag += 1;
     if (this.dataService.homeCountFlag > 1) {
       this.dataService.reset();
     }
-
+    // Fetch the vehicle details from vehicles API
     this.vehicleDataFetcher();
   }
 
   ngAfterViewInit() {
+    // Makes the page responsive in AfterViewInit lifecycle hook
     this.responsive();
   }
 
   ngOnDestroy() {
+    // Removing event lisetners on component destroy
     window.removeEventListener('orientationchange', this.responsive);
     window.removeEventListener('resize', this.responsive);
     window.removeEventListener('sizemodechange', this.responsive);
   }
+  // Returns static text from staticContent.json
   get staticContent() {
     return staticContent;
   }
-  responsive() {
+  // Sets the height for home-container and opac container
+  responsive(): void {
+    // Height of the header component
     const header = document.getElementById('header').offsetHeight;
+    // Height of the footer component
     const footer = document.getElementById('footer').offsetHeight;
+    // Gets the height of the body
     const body = document.body.offsetHeight;
+    // Sets the height of the home-container
     const home = document.getElementById('home');
     if (home) {
       document.getElementById('home').style.minHeight =
         body - header - footer + 'px';
     }
-
+    // Gets the height of the home-container
     const homeHeight = document.getElementById('home').offsetHeight;
+    // Sets the height of the opac-container
     const opac = document.getElementById('opac');
     if (opac) {
       opac.style.minHeight = homeHeight - 48 + 'px';
@@ -69,23 +72,29 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   // Event recieved from planet-ship-selector.component to dispaly next selector component
-  displayNextSelector(selectorInstance) {
+  displayNextSelector(selectorInstance): void {
     this.displayPlanetShipSelector[selectorInstance] = true;
   }
   // Fetch the vehicle details from vehicles api
-  vehicleDataFetcher() {
+  vehicleDataFetcher(): void {
+    // Shows the spinner on load of the home component
     this.spinner.show();
-    this.dataService.vehicleFetch().subscribe(vehicles => {
-      this.dataService.vehiclesApiData = vehicles;
-      for (const vehicle of this.dataService.vehiclesApiData) {
-        const name = vehicle.name.split(' ');
-        this.dataService.vehicleCount[name[1]] = vehicle.total_no;
+    this.dataService.vehicleFetch().subscribe(
+      vehicles => {
+        this.dataService.vehiclesApiData = vehicles;
+        // Creating vehicleCount object with no of vehicles received from the vehicles Api
+        for (const vehicle of this.dataService.vehiclesApiData) {
+          const name = vehicle.name.split(' ');
+          this.dataService.vehicleCount[name[1]] = vehicle.total_no;
+        }
+        // Hides the spinner after data is received and stored in service
+        setTimeout(() => this.spinner.hide(), 1000);
+      },
+      error => {
+        // If there is any server side error the window reloads
+        window.location.reload();
       }
-      setTimeout(() => this.spinner.hide(), 1000);
-      console.log(this.dataService.vehicleCount);
-    }, error => {
-      window.location.reload();
-    });
+    );
   }
   // get disableLaunchButton value from service
   get disableLaunchButton(): Boolean {
@@ -95,7 +104,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   launchVehicles() {
     // Disable launch button
     this.dataService.disableLaunchButton = false;
-    // Get token from Api
+    // Get token from Api and calls the launchVehiclesApi
     this.dataService.getToken();
   }
 }

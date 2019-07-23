@@ -11,7 +11,7 @@ export class FooterComponent implements OnInit {
   constructor(private dataService: DataService) {}
 
   ngOnInit() {}
-
+  // Returns static text from staticContent.json
   get staticContent() {
     return staticContent;
   }

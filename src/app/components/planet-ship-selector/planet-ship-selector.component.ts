@@ -2,7 +2,6 @@ import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { RadiogroupUtility } from './radiogroup.utility';
-
 import staticContent from '../../../assets/jsons/staticContent.json';
 
 @Component({
@@ -36,9 +35,10 @@ export class PlanetShipSelectorComponent extends RadiogroupUtility
   }
 
   ngAfterViewChecked() {
+    // Invoking the change detection mechanism
     this.cdRef.detectChanges();
   }
-
+  // Returns static text from staticContent.json
   get staticContent() {
     return staticContent;
   }

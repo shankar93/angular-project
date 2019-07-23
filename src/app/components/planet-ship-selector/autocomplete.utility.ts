@@ -13,7 +13,7 @@ export class AutocompleteUtility {
   // Array to store planets from planets API
   planets: Array<string> = [];
   // Array to store distances from planets API
-  distances: Array<Number> = [];
+  // distances: Array<Number> = [];
   // Observable to filter the options in auto complete
   filteredOptions: Observable<string[]>;
   // Checks second atttempt to change in autocomplete
@@ -29,8 +29,6 @@ export class AutocompleteUtility {
   secondRadioCheck = '';
   // Object for vehicles count
   allVehicles = {};
-  // Vehicles api data
-  vehiclesApiData = [];
   // Array with units of vehicles
   vehicle_units = [];
   //
@@ -58,7 +56,7 @@ export class AutocompleteUtility {
       if (allPlanets) {
         for (const planet of allPlanets) {
           this.planets.push(planet.name);
-          this.distances.push(planet.distance);
+          // this.distances.push(planet.distance);
           this.dataService.planetDistance[planet.name] = planet.distance;
         }
         console.log(this.dataService.planetDistance);
@@ -130,7 +128,7 @@ export class AutocompleteUtility {
     }
     this.dataService.selectedPlanets.next(this.dataService.selectedPlanetsData);
   }
-  // Returns a boolean if particular option needs to be disabled
+  // Returns a boolean if particular option needs to be disabled or not
   disableCheck(option) {
     return this.dataService.selectedPlanetsData[this.planetInstance][option];
   }

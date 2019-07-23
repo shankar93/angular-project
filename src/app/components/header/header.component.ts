@@ -8,17 +8,16 @@ import staticContent from '../../../assets/jsons/staticContent.json';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  constructor(
-    private dataService: DataService,
-  ) {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {}
 
+  // Returns static text from staticContent.json
   get staticContent() {
     return staticContent;
   }
-
-  reset() {
+  // Resets to initial state
+  reset(): void {
     this.dataService.duplicateNavigation();
     this.dataService.reset();
   }
