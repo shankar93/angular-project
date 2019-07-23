@@ -5,12 +5,12 @@
     <!-- Center div contianer -->
     <div class="col-10 margin-center">
       <!-- Grey background and if planet found-->
-      <!--  -->
       <div
         id="opac"
         class="col-12 pad-0 float-left my-4 text-center opac"
         *ngIf="planetFound"
       >
+      <!-- Success container -->
         <div class="col-12 pad-0 success-container">
           <p class="font-weight-bold text-center text-success lead">
             {{ staticContent.result.success }}
@@ -27,12 +27,12 @@
         </div>
       </div>
       <!-- Grey background and if planet not found-->
-      <!--  -->
       <div
         id="opac"
         class="col-12 pad-0 float-left text-center my-4 opac"
         *ngIf="!planetFound"
       >
+      <!-- Failure container -->
         <div class="col-12 pad-0 failure-contianer">
           <h3 class="font-weight-bold text-center text-danger">
             {{ staticContent.result.failure }}
@@ -47,5 +47,4 @@
 </div>
 <!-- angular notifier -->
 <notifier-container></notifier-container>
-<!-- angular notifier ends-->
 <div class="clearfix"></div>

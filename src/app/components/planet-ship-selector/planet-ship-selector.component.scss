@@ -1,23 +1,21 @@
+form {
+  table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      text-align: center;
+    }
+  }
+  .radio-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
 .spinner {
   margin: auto;
   position: absolute;
   left: 25%;
-}
-.hide {
-  visibility: hidden;
-}
-table,
-th,
-td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  text-align: center;
-}
-.radio-container {
-  display: flex;
-  flex-direction: column;
 }

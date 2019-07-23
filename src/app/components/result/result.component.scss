@@ -1,8 +1,10 @@
-.success-container {
-  position: absolute;
-  top: 20%;
-}
-.failure-contianer {
-  position: absolute;
-  top: 40%;
+.space-image-container {
+  .success-container {
+    position: absolute;
+    top: 20%;
+  }
+  .failure-contianer {
+    position: absolute;
+    top: 40%;
+  }
 }

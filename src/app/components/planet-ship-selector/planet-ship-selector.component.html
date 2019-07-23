@@ -1,9 +1,11 @@
+<!-- Planet ship selector form -->
 <form
   autocomplete="off"
   novalidate
   *ngIf="!dataAvailable"
   #formDirective="ngForm"
 >
+<!-- Material autocomplete to select planet-->
   <mat-form-field>
     <input
       type="text"
@@ -27,7 +29,7 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-
+<!-- Material radio group to select vehicle-->
   <mat-radio-group
     [formControl]="vehicle"
     (change)="vehicleSelected($event)"
@@ -60,7 +62,8 @@
       >{{staticContent.planetShipSelector.spaceShip}} ({{ allVehicles.ship }})</mat-radio-button
     >
   </mat-radio-group>
-  <table [class.hide]="!(vehicleSpeed && timeTaken)" class="table table-sm table-dark col-10 ">
+  <!-- Table to display speed, time taken -->
+  <table [class.invisible]="!(vehicleSpeed && timeTaken)" class="table table-sm table-dark col-10 ">
     <tr>
       <th>{{staticContent.planetShipSelector.vehicleSpeed}}</th>
       <td>{{ vehicleSpeed }}</td>
@@ -71,6 +74,7 @@
     </tr>
   </table>
 </form>
+<!-- Spinner -->
 <mat-spinner
   *ngIf="dataAvailable"
   class="spinner"

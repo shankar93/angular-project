@@ -10,61 +10,21 @@
         <p class="text-center font-weight-bold pt-4">
           {{ staticContent.home.introText }}
         </p>
-        <!-- Selectors container -->
+        <!--Planet vehicle Selectors container -->
         <div class="col-12 float-left mt-4">
-          <!-- select planet zero and mode of transport -->
           <div
             id="planetShipInstance[0]"
             class="col-lg-3 col-md-6 col-12 float-left"
-            *ngIf="displayPlanetShipSelector[0]"
+            *ngFor="let planetShip of planetShipInstance"
           >
             <app-planet-ship-selector
-              [planetInstance]="planetShipInstance[0]"
+            *ngIf="displayPlanetShipSelector[planetShip]"
+              [planetInstance]="planetShipInstance[planetShip]"
               (displayNextInstance)="displayNextSelector($event)"
             ></app-planet-ship-selector>
           </div>
-          <!-- select planet zero and mode of transport ends-->
-
-          <!-- select planet one and mode of transport -->
-          <div
-            id="planetShipInstance[1]"
-            class="col-lg-3 col-md-6 col-12 float-left"
-            *ngIf="displayPlanetShipSelector[1]"
-            #scroll
-          >
-            <app-planet-ship-selector
-              [planetInstance]="planetShipInstance[1]"
-              (displayNextInstance)="displayNextSelector($event)"
-            ></app-planet-ship-selector>
-          </div>
-          <!-- select planet one and mode of transport ends-->
-
-          <!-- select planet two and mode of transport -->
-          <div
-            id="planetShipInstance[2]"
-            class="col-lg-3 col-md-6 col-12 float-left"
-            *ngIf="displayPlanetShipSelector[2]"
-          >
-            <app-planet-ship-selector
-              [planetInstance]="planetShipInstance[2]"
-              (displayNextInstance)="displayNextSelector($event)"
-            ></app-planet-ship-selector>
-          </div>
-          <!-- select planet two and mode of transport ends-->
-
-          <!-- select planet three and mode of transport -->
-          <div
-            id="planetShipInstance[3]"
-            class="col-lg-3 col-md-6 col-12 float-left"
-            *ngIf="displayPlanetShipSelector[3]"
-          >
-            <app-planet-ship-selector
-              [planetInstance]="planetShipInstance[3]"
-              (displayNextInstance)="displayNextSelector($event)"
-            ></app-planet-ship-selector>
-          </div>
-          <!-- select planet three and mode of transport ends-->
         </div>
+        <!-- Launch button container -->
         <div class="col-12 float-left text-center pb-3">
           <button
             (click)="launchVehicles()"
@@ -73,7 +33,7 @@
             [disabled]="disableLaunchButton"
             class="col-6"
           >
-          {{ staticContent.home.launchButton }}
+            {{ staticContent.home.launchButton }}
           </button>
         </div>
       </div>
@@ -82,5 +42,4 @@
 </div>
 <!-- angular notifier -->
 <notifier-container></notifier-container>
-<!-- angular notifier ends-->
 <div class="clearfix"></div>

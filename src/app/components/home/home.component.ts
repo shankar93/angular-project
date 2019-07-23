@@ -83,6 +83,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       setTimeout(() => this.spinner.hide(), 1000);
       console.log(this.dataService.vehicleCount);
+    }, error => {
+      window.location.reload();
     });
   }
   // get disableLaunchButton value from service

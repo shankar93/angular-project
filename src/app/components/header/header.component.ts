@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import staticContent from '../../../assets/jsons/staticContent.json';
 
@@ -10,7 +9,6 @@ import staticContent from '../../../assets/jsons/staticContent.json';
 })
 export class HeaderComponent implements OnInit {
   constructor(
-    private router: Router,
     private dataService: DataService,
   ) {}
 

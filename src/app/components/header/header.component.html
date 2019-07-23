@@ -4,7 +4,6 @@
   <a class="navbar-brand text-white font-weight-bold font-size-20">{{
     staticContent?.header?.findingFalcon
   }}</a>
-  <!-- brand text ends-->
   <!-- Toggler/collapsibe Button -->
   <button
     class="navbar-toggler outline-none"
@@ -22,16 +21,16 @@
       <li
         class="nav-item text-center"
         data-toggle="collapse"
-        data-target="#collapsibleNavbar"
+        data-target=".navbar-collapse.show"
       >
         <a class="nav-link" (click)="reset()">{{
           staticContent?.header?.reset
         }}</a>
       </li>
       <li
-        class="nav-item dropdown text-center"
+        class="nav-item text-center"
         data-toggle="collapse"
-        data-target="#collapsibleNavbar"
+        data-target=".navbar-collapse.show"
       >
         <a class="nav-link" target="_blank" href="https://www.geektrust.in"
           >{{ staticContent?.header?.geekTrustHome }}</a
@@ -39,6 +38,4 @@
       </li>
     </ul>
   </div>
-  <!-- right-aligned navbar ends-->
 </nav>
-<!-- Header ends-->
