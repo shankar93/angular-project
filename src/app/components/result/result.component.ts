@@ -64,7 +64,7 @@ export class ResultComponent implements OnInit, AfterViewInit, OnDestroy {
     // );
   }
   // Returns static text from staticContent.json
-  get staticContent(): object {
+  get staticContent() {
     return staticContent;
   }
   // Gets and returns planetFound from dataService

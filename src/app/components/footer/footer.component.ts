@@ -12,7 +12,7 @@ export class FooterComponent implements OnInit {
 
   ngOnInit() {}
   // Returns static text from staticContent.json
-  get staticContent(): object {
+  get staticContent() {
     return staticContent;
   }
 }

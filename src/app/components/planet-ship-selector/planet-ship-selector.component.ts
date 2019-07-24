@@ -39,7 +39,7 @@ export class PlanetShipSelectorComponent extends RadiogroupUtility
     this.cdRef.detectChanges();
   }
   // Returns static text from staticContent.json
-  get staticContent(): object {
+  get staticContent() {
     return staticContent;
   }
 }

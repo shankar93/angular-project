@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     window.removeEventListener('sizemodechange', this.responsive);
   }
   // Returns static text from staticContent.json
-  get staticContent(): object {
+  get staticContent() {
     return staticContent;
   }
   // Sets the height for home-container and opac container
