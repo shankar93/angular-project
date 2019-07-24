@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { SelectedPlanets } from '../models/selected-planets.model';
-import { Planets } from '../models/planets.model';
-import { Vehicles } from '../models/vehicles.model';
+import { environment } from 'src/environments/environment';
+import { SelectedPlanetsModel } from '../models/selected-planets.model';
+import { PlanetsModel } from '../models/planets.model';
+import { VehiclesModel } from '../models/vehicles.model';
+import { FindFalconeModel } from '../models/find-falcone.model';
+import { FindResponseModel } from '../models/find-response.model';
+
+// Api endpoint
+const API_URL: string = environment.restApi;
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
   // selectedPlanetsData initialized for all the autocompletes
-  selectedPlanetsData = [
+  selectedPlanetsData: Array<SelectedPlanetsModel> = [
     {
       Donlon: false,
       Enchai: false,
@@ -47,17 +53,17 @@ export class DataService {
     }
   ];
   // Object with planet names and distances
-  planetDistance = {};
+  planetDistance: Object = {};
   // Object with no of vehicles available
-  vehicleCount = {};
+  vehicleCount: Object = {};
 
   // Stores the vehicles details recieved from Vehicles Api
-  vehiclesApiData: Vehicles[];
+  vehiclesApiData: VehiclesModel[];
   // Request body for finding falcone Api
-  findFalconeRequestBody = { token: '', planet_names: [], vehicle_names: [] };
+  findFalconeRequestBody: FindFalconeModel = { token: '', planet_names: [], vehicle_names: [] };
 
   // Behavioral subject to disable selected planets in other dropdowns
-  selectedPlanets = new BehaviorSubject<Array<SelectedPlanets>>(
+  selectedPlanets = new BehaviorSubject<Array<SelectedPlanetsModel>>(
     this.selectedPlanetsData
   );
   // Behavioral subject to alter no of vehicles available
@@ -82,9 +88,9 @@ export class DataService {
   // count of number of visits of the home component
   homeCountFlag = 0;
   // Array to store the time taken by vehicles selected
-  vehiclesTimeArray: any = [];
+  vehiclesTimeArray: Array<number> = [];
   // If success time taken to reach the planet found
-  timeTaken: any;
+  timeTaken: number;
 
   constructor(
     private httpClient: HttpClient,
@@ -92,15 +98,13 @@ export class DataService {
     private spinner: NgxSpinnerService
   ) {}
   // Returns the planets and their distances from the planets Api
-  planetFetch() {
-    return this.httpClient.get<Array<Planets>>(
-      'https://findfalcone.herokuapp.com/planets'
-    );
+  planetFetch(): Observable<Array<PlanetsModel>> {
+    return this.httpClient.get<Array<PlanetsModel>>(`${API_URL}/planets`);
   }
   // Returns the vehicles and their details from the vehicles Api
-  vehicleFetch() {
-    return this.httpClient.get<Array<Vehicles>>(
-      'https://findfalcone.herokuapp.com/vehicles'
+  vehicleFetch(): Observable<Array<VehiclesModel>> {
+    return this.httpClient.get<Array<VehiclesModel>>(
+      `${API_URL}/vehicles`
     );
   }
   // Fetches the token and calls the launchVehicles Api
@@ -109,7 +113,7 @@ export class DataService {
     this.spinner.show();
     this.httpClient
       .post<{ token: string }>(
-        'https://findfalcone.herokuapp.com/token',
+        `${API_URL}/token`,
         '',
         this.getTokenHeaders
       )
@@ -120,11 +124,11 @@ export class DataService {
       });
   }
 
-  launchVehiclesApi() {
+  launchVehiclesApi(): void {
     console.log(this.findFalconeRequestBody);
-    return this.httpClient
-      .post<{ planet_name: string; status: string }>(
-        'https://findfalcone.herokuapp.com/find',
+    this.httpClient
+      .post<FindResponseModel>(
+        `${API_URL}/find`,
         this.findFalconeRequestBody,
         this.findApiHeaders
       )
@@ -144,7 +148,7 @@ export class DataService {
       });
   }
   // If success to display the time taken in result component
-  successTimeTaken() {
+  successTimeTaken(): void {
     this.findFalconeRequestBody.planet_names.forEach((planet, index) => {
       console.log('pv', this.planetFound, planet);
       if (this.planetFound === planet) {
@@ -154,13 +158,13 @@ export class DataService {
     });
   }
   // Uses navigation to reload the component
-  duplicateNavigation() {
+  duplicateNavigation(): void {
     this.router
       .navigateByUrl('/result', { skipLocationChange: true })
       .then(() => this.router.navigate(['/home']));
   }
   // Sets selectedPlanets behavioural subject to initial state
-  reset() {
+  reset(): void {
     this.selectedPlanetsData = [
       {
         Donlon: false,

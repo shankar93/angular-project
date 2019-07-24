@@ -1,4 +1,4 @@
-export class SelectedPlanets {
+export class SelectedPlanetsModel {
   constructor(
     public Donlon: boolean,
     public Enchai: boolean,

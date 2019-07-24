@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ResultComponent } from './components/result/result.component';
 import { AuthGuard } from './guards/auth-guard.service';
-// import { ResolverService } from './resolvers/resolver.service';
+
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   {
@@ -11,8 +11,6 @@ const routes: Routes = [
     component: ResultComponent,
     canActivate: [AuthGuard]
   },
-  // ,
-  //   resolve: { products: ResolverService }
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 

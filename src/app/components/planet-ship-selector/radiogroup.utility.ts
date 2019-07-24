@@ -2,7 +2,7 @@ import { AutocompleteUtility } from './autocomplete.utility';
 
 export class RadiogroupUtility extends AutocompleteUtility {
   /*------------------------------------ RADIO GROUP CODE------------------------------------ */
-  vehicleSelected(event) {
+  vehicleSelected(event): void {
     // Emits an event to display next instance of planet-ship-selector
     this.displayNextInstance.emit(this.planetInstance + 1);
 
@@ -26,7 +26,7 @@ export class RadiogroupUtility extends AutocompleteUtility {
     console.log(this.dataService.findFalconeRequestBody);
   }
 
-  vehicleSecondCheck() {
+  vehicleSecondCheck(): void {
     if (this.secondRadioCheck) {
       this.dataService.vehicleCount[this.secondRadioCheck] += 1;
       this.dataService.selectedVehicles.next(this.dataService.vehicleCount);
@@ -34,14 +34,14 @@ export class RadiogroupUtility extends AutocompleteUtility {
   }
 
   // subscribe to selectedvehicles observable to receive updated values
-  changeSelectedVehiclesCount() {
+  changeSelectedVehiclesCount(): void {
     this.dataService.selectedVehicles.subscribe(vehicles => {
       this.allVehicles = vehicles;
     });
   }
 
-  // Returns a boolean if particular option needs to be disabled
-  disableVehicleCount(value, num) {
+  // Returns a boolean if particular radio option needs to be disabled
+  disableVehicleCount(value, num): boolean {
     return (
       value <= 0 ||
       this.dataService.planetDistance[this.planetAutoComplete.value] >
@@ -49,7 +49,7 @@ export class RadiogroupUtility extends AutocompleteUtility {
     );
   }
 
-  checkDataAvailablity(num) {
+  checkDataAvailablity(num): number {
     try {
       return this.dataService.vehiclesApiData[num].max_distance;
     } catch (e) {}
@@ -57,7 +57,7 @@ export class RadiogroupUtility extends AutocompleteUtility {
   /*------------------------------------ RADIO GROUP CODE ENDS-------------------------------- */
 
   // Push planets, vehicles into the request body to find falcone
-  findFalconeRequest() {
+  findFalconeRequest(): void {
     // pushing the planet selected for particular instance to the request body
     this.dataService.findFalconeRequestBody.planet_names[
       this.planetInstance
@@ -67,7 +67,7 @@ export class RadiogroupUtility extends AutocompleteUtility {
     this.dataService.findFalconeRequestBody.vehicle_names[
       this.planetInstance
     ] = vehicle_name;
-
+    // Checks and assigns if launch button should be disabled or not
     const vehicleArrayLength =
       this.dataService.findFalconeRequestBody.vehicle_names.length === 4;
 

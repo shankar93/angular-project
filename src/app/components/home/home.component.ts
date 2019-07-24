@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NotifierService } from 'angular-notifier';
 import { DataService } from '../../services/data.service';
 import staticContent from '../../../assets/jsons/staticContent.json';
 
@@ -16,7 +17,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private dataService: DataService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private notifier: NotifierService
   ) {}
 
   ngOnInit() {
@@ -45,7 +47,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     window.removeEventListener('sizemodechange', this.responsive);
   }
   // Returns static text from staticContent.json
-  get staticContent() {
+  get staticContent(): object {
     return staticContent;
   }
   // Sets the height for home-container and opac container
@@ -72,7 +74,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   // Event recieved from planet-ship-selector.component to dispaly next selector component
-  displayNextSelector(selectorInstance): void {
+  displayNextSelector(selectorInstance: number): void {
     this.displayPlanetShipSelector[selectorInstance] = true;
   }
   // Fetch the vehicle details from vehicles api
@@ -91,8 +93,25 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         setTimeout(() => this.spinner.hide(), 1000);
       },
       error => {
+        if (!sessionStorage.getItem('reloadCount')) {
+          sessionStorage.setItem('reloadCount', '0');
+        }
+        let reloadCount = Number(sessionStorage.getItem('reloadCount'));
+        reloadCount++;
+        sessionStorage.setItem('reloadCount', String(reloadCount));
+        if (reloadCount <= 1) {
         // If there is any server side error the window reloads
-        window.location.reload();
+          window.location.reload();
+        } else if (reloadCount >= 2) {
+          const errorMessage = 'No Internet.check your proxy';
+          setTimeout(() => {
+            this.notifier.show({
+              type: 'error',
+              message: errorMessage,
+              id: 'THAT_NOTIFICATION_ID'
+            });
+          }, 5000);
+        }
       }
     );
   }
@@ -101,7 +120,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.dataService.disableLaunchButton;
   }
   // send selected planets, vehicles to find the falcone after fetching the token
-  launchVehicles() {
+  launchVehicles(): void {
     // Disable launch button
     this.dataService.disableLaunchButton = false;
     // Get token from Api and calls the launchVehiclesApi

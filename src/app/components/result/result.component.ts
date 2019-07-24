@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DataService } from '../../services/data.service';
-import { Vehicles } from '../../models/vehicles.model';
+import { VehiclesModel } from '../../models/vehicles.model';
 import staticContent from '../../../assets/jsons/staticContent.json';
 
 @Component({
@@ -32,7 +32,7 @@ export class ResultComponent implements OnInit, AfterViewInit, OnDestroy {
     window.removeEventListener('sizemodechange', this.responsive);
   }
 
-  responsive() {
+  responsive(): void {
     // Height of the header component
     const header = document.getElementById('header').offsetHeight;
     // Height of the footer component
@@ -64,7 +64,7 @@ export class ResultComponent implements OnInit, AfterViewInit, OnDestroy {
     // );
   }
   // Returns static text from staticContent.json
-  get staticContent() {
+  get staticContent(): object {
     return staticContent;
   }
   // Gets and returns planetFound from dataService
@@ -72,11 +72,11 @@ export class ResultComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.dataService.planetFound;
   }
   // Gets and returns timeTaken from dataService
-  get timeTaken() {
+  get timeTaken(): number {
     return this.dataService.timeTaken;
   }
   // Resets to initial state
-  reset() {
+  reset(): void {
     this.dataService.duplicateNavigation();
     this.dataService.reset();
   }

@@ -1,4 +1,4 @@
-export class Vehicles {
+export class VehiclesModel {
   constructor(
     public name: string,
     public total_no: number,
