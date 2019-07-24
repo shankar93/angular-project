@@ -144,7 +144,7 @@ export class DataService {
         this.findFalconeRequestBody.planet_names = [];
         this.findFalconeRequestBody.vehicle_names = [];
         // Hiding the loader on successfully receiving data
-        setTimeout(() => this.spinner.hide(), 1000);
+        setTimeout(() => this.spinner.hide(), 800);
       });
   }
   // If success to display the time taken in result component

@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
           this.dataService.vehicleCount[name[1]] = vehicle.total_no;
         }
         // Hides the spinner after data is received and stored in service
-        setTimeout(() => this.spinner.hide(), 1000);
+        setTimeout(() => this.spinner.hide(), 800);
       },
       error => {
         if (!sessionStorage.getItem('reloadCount')) {

@@ -1,8 +1,10 @@
 import { AutocompleteUtility } from './autocomplete.utility';
+import { MatRadioChange } from '@angular/material';
 
 export class RadiogroupUtility extends AutocompleteUtility {
   /*------------------------------------ RADIO GROUP CODE------------------------------------ */
-  vehicleSelected(event): void {
+  vehicleSelected(event: MatRadioChange): void {
+    console.log(event);
     // Emits an event to display next instance of planet-ship-selector
     this.displayNextInstance.emit(this.planetInstance + 1);
 

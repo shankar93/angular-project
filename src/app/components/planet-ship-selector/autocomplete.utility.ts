@@ -2,10 +2,8 @@ import { Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-
 import { DataService } from '../../services/data.service';
-import { MatAutocompleteSelectedEvent } from '../../../../node_modules/@angular/material';
-// import { SelectedPlanets } from '../../models/selected-planets.model';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
 
 export class AutocompleteUtility {
   // Reactive form controls for planet,vehicle selector
