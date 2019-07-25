@@ -9,21 +9,25 @@ export class AutocompleteUtility {
   // Reactive form controls for planet,vehicle selector
   planetAutoComplete = new FormControl('');
   vehicle = new FormControl();
-  // Array to store planets from planets API
-  planets: Array<string> = [];
+  /*
+    // Array to store planets from planets API
+    planets: Array<string> = [];
+   */
   // Array to store distances from planets API
   filteredOptions: Observable<string[]>;
   // Checks second atttempt to change in autocomplete
   secondAttemptFlag: any;
-
   // To check if data is available from API
   dataAvailable = false;
+  // Input variable from home.component with planets names
+  @Input() planets: string[];
   // Input variable from home.component with planet-ship-selector instances
   @Input() planetInstance: any;
   // Event variable to home.component to display next planet-ship-selector
   @Output() displayNextInstance = new EventEmitter<boolean>();
   // value changes if radio selection is changed
-  secondRadioCheck; String = '';
+  secondRadioCheck;
+  String = '';
   // Object for vehicles count
   allVehicles: object = {};
   // Array with units of vehicles
@@ -45,29 +49,16 @@ export class AutocompleteUtility {
       console.log(this.dataService.selectedPlanetsData);
     });
   }
-  // Fetch planets and distances from planets API
-  planetDataFetcher(): void {
-    this.dataAvailable = true;
-    this.dataService.planetFetch().subscribe(allPlanets => {
-      for (const planet of allPlanets) {
-        this.planets.push(planet.name);
-        // this.distances.push(planet.distance);
-        this.dataService.planetDistance[planet.name] = planet.distance;
-      }
-      console.log(this.dataService.planetDistance);
-      this.dataAvailable = false;
-      // To display filtered options from input in autocomplete
-      this.filteredOptions = this.planetAutoComplete.valueChanges.pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
-      console.log(this.planets);
-    });
+  // Initilazes autocomplete when data is recieved from planets Api
+  autoCompleteInitializer(): void {
+    this.filteredOptions = this.planetAutoComplete.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
   }
   // Helper method to filter options
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.planets.filter(option =>
       option.toLowerCase().includes(filterValue)
     );

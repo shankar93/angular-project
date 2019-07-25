@@ -19,11 +19,13 @@ export class PlanetShipSelectorComponent extends RadiogroupUtility
   }
 
   ngOnInit() {
+    // calls autocompleteInitialzer when planets Api data is received
+    this.dataService.planetsList.subscribe(data => {
+      this.autoCompleteInitializer();
+    });
     /* ----------------------------------Auto complete code------------------------------ */
     // Subscribed to selectedPlanets Behavioural subject
     this.selectedPlanetsSubscribe();
-    // Fetch planets and distances from planets API
-    this.planetDataFetcher();
     /* ----------------------------------Auto complete code ends------------------------- */
 
     /*-----------------------------------Radio group code-------------------------------  */
@@ -41,5 +43,8 @@ export class PlanetShipSelectorComponent extends RadiogroupUtility
   // Returns static text from staticContent.json
   get staticContent() {
     return staticContent;
+  }
+  get selectorAvailable() {
+    return this.dataService.selectorAvailable;
   }
 }

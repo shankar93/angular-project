@@ -11,6 +11,7 @@ import { Router } from '../../../../node_modules/@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
+  planets = [];
   // Component instance number passed to  planet-ship-selector.component
   planetShipInstance: Array<Number> = [0, 1, 2, 3];
   // Boolean value to display next planet-ship-selector.component
@@ -33,6 +34,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.dataService.homeCountFlag > 1) {
       this.dataService.reset();
     }
+    // Fetch the planet details from planets API
+    this.planetDataFetcher();
     // Fetch the vehicle details from vehicles API
     this.vehicleDataFetcher();
   }
@@ -47,6 +50,18 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     window.removeEventListener('orientationchange', this.responsive);
     window.removeEventListener('resize', this.responsive);
     window.removeEventListener('sizemodechange', this.responsive);
+  }
+  // Fetch planets and distances from planets API
+  planetDataFetcher() {
+    this.dataService.selectorAvailable = true;
+    this.dataService.planetFetch().subscribe(allPlanets => {
+      for (const planet of allPlanets) {
+        this.planets.push(planet.name);
+        this.dataService.planetDistance[planet.name] = planet.distance;
+      }
+      this.dataService.selectorAvailable = false;
+      this.dataService.planetsList.next(1);
+    });
   }
   // Returns static text from staticContent.json
   get staticContent() {
@@ -126,8 +141,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     // Disable launch button
     this.dataService.disableLaunchButton = false;
     // Get token from Api and calls the launchVehiclesApi
-    this.dataService.getToken()
-    .subscribe(data => {
+    this.dataService.getToken().subscribe(data => {
       console.log(data.token);
       this.dataService.findFalconeRequestBody.token = data.token;
       this.dataService.launchVehiclesApi().subscribe(result => {
@@ -147,8 +161,3 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 }
-
-
-
-
-/*  */

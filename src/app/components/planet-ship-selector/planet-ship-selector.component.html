@@ -2,7 +2,7 @@
 <form
   autocomplete="off"
   novalidate
-  *ngIf="!dataAvailable"
+  *ngIf="!selectorAvailable"
   #formDirective="ngForm"
 >
 <!-- Material autocomplete to select planet-->
@@ -76,7 +76,7 @@
 </form>
 <!-- Spinner -->
 <mat-spinner
-  *ngIf="dataAvailable"
+  *ngIf="selectorAvailable"
   class="spinner"
   strokeWidth="3"
   [diameter]="50"

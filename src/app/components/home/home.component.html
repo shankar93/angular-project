@@ -19,6 +19,7 @@
           >
             <app-planet-ship-selector
             *ngIf="displayPlanetShipSelector[planetShip]"
+              [planets]="planets"
               [planetInstance]="planetShipInstance[planetShip]"
               (displayNextInstance)="displayNextSelector($event)"
             ></app-planet-ship-selector>

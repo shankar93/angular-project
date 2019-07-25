@@ -65,7 +65,10 @@ export class DataService {
     planet_names: [],
     vehicle_names: []
   };
-
+  // Boolean to alternate spinner and selector component
+  selectorAvailable = true;
+  // Behavioral subject to initliaze planets array in planet-ship-selector autocomplete
+  planetsList = new BehaviorSubject<Number>(0);
   // Behavioral subject to disable selected planets in other dropdowns
   selectedPlanets = new BehaviorSubject<Array<SelectedPlanetsModel>>(
     this.selectedPlanetsData
@@ -113,18 +116,20 @@ export class DataService {
   getToken(): Observable<{ token: string }> {
     // Display the spinner while data is getting retrieved
     this.spinner.show();
-    return this.httpClient
-      .post<{ token: string }>(`${API_URL}/token`, '', this.getTokenHeaders);
+    return this.httpClient.post<{ token: string }>(
+      `${API_URL}/token`,
+      '',
+      this.getTokenHeaders
+    );
   }
 
   launchVehiclesApi(): Observable<FindResponseModel> {
     console.log(this.findFalconeRequestBody);
-    return this.httpClient
-      .post<FindResponseModel>(
-        `${API_URL}/find`,
-        this.findFalconeRequestBody,
-        this.findApiHeaders
-      );
+    return this.httpClient.post<FindResponseModel>(
+      `${API_URL}/find`,
+      this.findFalconeRequestBody,
+      this.findApiHeaders
+    );
   }
   // If success to display the time taken in result component
   successTimeTaken(): void {
