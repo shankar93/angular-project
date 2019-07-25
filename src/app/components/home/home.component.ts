@@ -3,6 +3,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { NotifierService } from 'angular-notifier';
 import { DataService } from '../../services/data.service';
 import staticContent from '../../../assets/jsons/staticContent.json';
+import { Router } from '../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private dataService: DataService,
+    private router: Router,
     private spinner: NgxSpinnerService,
     private notifier: NotifierService
   ) {}
@@ -100,7 +102,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         reloadCount++;
         sessionStorage.setItem('reloadCount', String(reloadCount));
         if (reloadCount <= 1) {
-        // If there is any server side error the window reloads
+          // If there is any server side error the window reloads
           window.location.reload();
         } else if (reloadCount >= 2) {
           const errorMessage = 'No Internet.check your proxy';
@@ -124,6 +126,29 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     // Disable launch button
     this.dataService.disableLaunchButton = false;
     // Get token from Api and calls the launchVehiclesApi
-    this.dataService.getToken();
+    this.dataService.getToken()
+    .subscribe(data => {
+      console.log(data.token);
+      this.dataService.findFalconeRequestBody.token = data.token;
+      this.dataService.launchVehiclesApi().subscribe(result => {
+        if (result.status === 'success') {
+          this.dataService.planetFound = result.planet_name;
+          this.dataService.successTimeTaken();
+        }
+        console.log('timetaken1', this.dataService.timeTaken);
+        // redirecting to result page after launch
+        this.router.navigate(['/result']);
+        // emptying planet,vehicle arrays to try again
+        this.dataService.findFalconeRequestBody.planet_names = [];
+        this.dataService.findFalconeRequestBody.vehicle_names = [];
+        // Hiding the loader on successfully receiving data
+        setTimeout(() => this.spinner.hide(), 800);
+      });
+    });
   }
 }
+
+
+
+
+/*  */

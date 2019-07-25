@@ -19,9 +19,9 @@ describe('AppComponent', () => {
   fit('should call ngOnInit', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    fixture.detectChanges();
     const spy = spyOn(app.router, 'navigate').and.callThrough();
-    expect(spy);
+    fixture.detectChanges();
+    expect(spy).toHaveBeenCalledWith(['/home']);
 
   });
 });

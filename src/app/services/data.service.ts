@@ -60,7 +60,11 @@ export class DataService {
   // Stores the vehicles details recieved from Vehicles Api
   vehiclesApiData: VehiclesModel[];
   // Request body for finding falcone Api
-  findFalconeRequestBody: FindFalconeModel = { token: '', planet_names: [], vehicle_names: [] };
+  findFalconeRequestBody: FindFalconeModel = {
+    token: '',
+    planet_names: [],
+    vehicle_names: []
+  };
 
   // Behavioral subject to disable selected planets in other dropdowns
   selectedPlanets = new BehaviorSubject<Array<SelectedPlanetsModel>>(
@@ -103,49 +107,24 @@ export class DataService {
   }
   // Returns the vehicles and their details from the vehicles Api
   vehicleFetch(): Observable<Array<VehiclesModel>> {
-    return this.httpClient.get<Array<VehiclesModel>>(
-      `${API_URL}/vehicles`
-    );
+    return this.httpClient.get<Array<VehiclesModel>>(`${API_URL}/vehicles`);
   }
   // Fetches the token and calls the launchVehicles Api
-  getToken(): void {
+  getToken(): Observable<{ token: string }> {
     // Display the spinner while data is getting retrieved
     this.spinner.show();
-    this.httpClient
-      .post<{ token: string }>(
-        `${API_URL}/token`,
-        '',
-        this.getTokenHeaders
-      )
-      .subscribe(data => {
-        console.log(data.token);
-        this.findFalconeRequestBody.token = data.token;
-        this.launchVehiclesApi();
-      });
+    return this.httpClient
+      .post<{ token: string }>(`${API_URL}/token`, '', this.getTokenHeaders);
   }
 
-  launchVehiclesApi(): void {
+  launchVehiclesApi(): Observable<FindResponseModel> {
     console.log(this.findFalconeRequestBody);
-    this.httpClient
+    return this.httpClient
       .post<FindResponseModel>(
         `${API_URL}/find`,
         this.findFalconeRequestBody,
         this.findApiHeaders
-      )
-      .subscribe(data => {
-        if (data.status === 'success') {
-          this.planetFound = data.planet_name;
-          this.successTimeTaken();
-        }
-        console.log('timetaken1', this.timeTaken);
-        // redirecting to result page after launch
-        this.router.navigate(['/result']);
-        // emptying planet,vehicle arrays to try again
-        this.findFalconeRequestBody.planet_names = [];
-        this.findFalconeRequestBody.vehicle_names = [];
-        // Hiding the loader on successfully receiving data
-        setTimeout(() => this.spinner.hide(), 800);
-      });
+      );
   }
   // If success to display the time taken in result component
   successTimeTaken(): void {
@@ -159,9 +138,7 @@ export class DataService {
   }
   // Uses navigation to reload the component
   duplicateNavigation(): void {
-    this.router
-      .navigateByUrl('/result', { skipLocationChange: true })
-      .then(() => this.router.navigate(['/home']));
+    this.router.navigate(['/home']);
   }
   // Sets selectedPlanets behavioural subject to initial state
   reset(): void {

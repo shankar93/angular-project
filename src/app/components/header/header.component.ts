@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   }
   // Resets to initial state
   reset(): void {
-    this.dataService.duplicateNavigation();
     this.dataService.reset();
+    this.dataService.duplicateNavigation();
   }
 }
