@@ -140,24 +140,38 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   launchVehicles(): void {
     // Disable launch button
     this.dataService.disableLaunchButton = false;
-    // Get token from Api and calls the launchVehiclesApi
+    // Getting token from Api and launching the vehicles
     this.dataService.getToken().subscribe(data => {
-      console.log(data.token);
-      this.dataService.findFalconeRequestBody.token = data.token;
-      this.dataService.launchVehiclesApi().subscribe(result => {
-        if (result.status === 'success') {
-          this.dataService.planetFound = result.planet_name;
-          this.dataService.successTimeTaken();
-        }
-        console.log('timetaken1', this.dataService.timeTaken);
-        // redirecting to result page after launch
-        this.router.navigate(['/result']);
-        // emptying planet,vehicle arrays to try again
-        this.dataService.findFalconeRequestBody.planet_names = [];
-        this.dataService.findFalconeRequestBody.vehicle_names = [];
-        // Hiding the loader on successfully receiving data
-        setTimeout(() => this.spinner.hide(), 800);
-      });
+      if (data.status === 'success') {
+        this.dataService.planetFound = data.planet_name;
+        this.dataService.successTimeTaken();
+      }
+      // redirecting to result page after launch
+      this.router.navigate(['/result']);
+      // emptying planet,vehicle arrays to start again
+      this.dataService.findFalconeRequestBody.planet_names = [];
+      this.dataService.findFalconeRequestBody.vehicle_names = [];
+      // Hiding the loader on successfully receiving data
+      setTimeout(() => this.spinner.hide(), 800);
     });
   }
 }
+
+/* this.dataService.getToken().subscribe(data => {
+  console.log(data.token);
+  this.dataService.findFalconeRequestBody.token = data.token;
+  this.dataService.launchVehiclesApi().subscribe(result => {
+    if (result.status === 'success') {
+      this.dataService.planetFound = result.planet_name;
+      this.dataService.successTimeTaken();
+    }
+    console.log('timetaken1', this.dataService.timeTaken);
+    // redirecting to result page after launch
+    this.router.navigate(['/result']);
+    // emptying planet,vehicle arrays to try again
+    this.dataService.findFalconeRequestBody.planet_names = [];
+    this.dataService.findFalconeRequestBody.vehicle_names = [];
+    // Hiding the loader on successfully receiving data
+    setTimeout(() => this.spinner.hide(), 800);
+  });
+}); */

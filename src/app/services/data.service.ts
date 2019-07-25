@@ -9,6 +9,7 @@ import { PlanetsModel } from '../models/planets.model';
 import { VehiclesModel } from '../models/vehicles.model';
 import { FindFalconeModel } from '../models/find-falcone.model';
 import { FindResponseModel } from '../models/find-response.model';
+import { mergeMap, tap, flatMap } from '../../../node_modules/rxjs/operators';
 
 // Api endpoint
 const API_URL: string = environment.restApi;
@@ -113,16 +114,24 @@ export class DataService {
     return this.httpClient.get<Array<VehiclesModel>>(`${API_URL}/vehicles`);
   }
   // Fetches the token and calls the launchVehicles Api
-  getToken(): Observable<{ token: string }> {
+  // : Observable<{ token: string }>
+  getToken() {
     // Display the spinner while data is getting retrieved
     this.spinner.show();
-    return this.httpClient.post<{ token: string }>(
-      `${API_URL}/token`,
-      '',
-      this.getTokenHeaders
-    );
+    return this.httpClient
+      .post<{ token: string }>(`${API_URL}/token`, '', this.getTokenHeaders)
+      .pipe(
+        tap(data => (this.findFalconeRequestBody.token = data.token)),
+        flatMap(data =>
+          this.httpClient.post<FindResponseModel>(
+            `${API_URL}/find`,
+            this.findFalconeRequestBody,
+            this.findApiHeaders
+          )
+        )
+      );
   }
-
+/*
   launchVehiclesApi(): Observable<FindResponseModel> {
     console.log(this.findFalconeRequestBody);
     return this.httpClient.post<FindResponseModel>(
@@ -130,7 +139,8 @@ export class DataService {
       this.findFalconeRequestBody,
       this.findApiHeaders
     );
-  }
+  } */
+
   // If success to display the time taken in result component
   successTimeTaken(): void {
     this.findFalconeRequestBody.planet_names.forEach((planet, index) => {

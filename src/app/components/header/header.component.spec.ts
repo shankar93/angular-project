@@ -13,8 +13,7 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [AppModule]
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -28,7 +27,8 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
   fit('reset function called', () => {
-    const spy = component.reset();
-    expect(spy);
+    component.reset();
+    expect(dataService.selectedPlanetsData[0].Donlon).toEqual(false);
+    expect(dataService.disableLaunchButton).toEqual(true);
   });
 });
