@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { PlanetShipSelectorComponent } from './planet-ship-selector.component';
 
@@ -8,9 +9,8 @@ describe('PlanetShipSelectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlanetShipSelectorComponent ]
-    })
-    .compileComponents();
+      declarations: [PlanetShipSelectorComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,6 +21,15 @@ describe('PlanetShipSelectorComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('planetSelection', () => {
+    const inputElement = fixture.nativeElement.querySelector('#autocomplete');
+    inputElement.focus();
+    inputElement.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      fixture.detectChanges(); });
   });
 
   /* fit('planetFetch', () => {

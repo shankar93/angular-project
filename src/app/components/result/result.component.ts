@@ -41,6 +41,7 @@ export class ResultComponent implements OnInit, AfterViewInit, OnDestroy {
     const body = document.body.offsetHeight;
     // Sets the height of the result-container
     const result = document.getElementById('result');
+    /* istanbul ignore else */
     if (result) {
       result.style.minHeight = body - header - footer + 'px';
     }
@@ -48,6 +49,7 @@ export class ResultComponent implements OnInit, AfterViewInit, OnDestroy {
     const resultHeight = document.getElementById('result').offsetHeight;
     // Sets the height of the opac-container
     const opac = document.getElementById('opac');
+    /* istanbul ignore else */
     if (opac) {
       opac.style.minHeight = resultHeight - 48 + 'px';
     }

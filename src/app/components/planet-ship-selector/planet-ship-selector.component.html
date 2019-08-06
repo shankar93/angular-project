@@ -5,9 +5,10 @@
   *ngIf="!selectorAvailable"
   #formDirective="ngForm"
 >
-<!-- Material autocomplete to select planet-->
+  <!-- Material autocomplete to select planet-->
   <mat-form-field>
     <input
+      id="autocomplete"
       type="text"
       placeholder="Enter a planet name"
       aria-label="Number"
@@ -29,7 +30,7 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-<!-- Material radio group to select vehicle-->
+  <!-- Material radio group to select vehicle-->
   <mat-radio-group
     [formControl]="vehicle"
     (change)="vehicleSelected($event)"
@@ -41,35 +42,46 @@
       id="{{ planetInstance }}_pod_0"
       [disabled]="disableVehicleCount(allVehicles.pod, 0)"
       value="{{ planetInstance }}_pod_0"
-      >{{staticContent.planetShipSelector.spacePod}} ({{ allVehicles.pod }})</mat-radio-button
+      >{{ staticContent.planetShipSelector.spacePod }} ({{
+        allVehicles.pod
+      }})</mat-radio-button
     >
     <mat-radio-button
       id="{{ planetInstance }}_rocket_1"
       value="{{ planetInstance }}_rocket_1"
       [disabled]="disableVehicleCount(allVehicles.rocket, 1)"
-      >{{staticContent.planetShipSelector.spaceRocket}} ({{ allVehicles.rocket }})</mat-radio-button
+      >{{ staticContent.planetShipSelector.spaceRocket }} ({{
+        allVehicles.rocket
+      }})</mat-radio-button
     >
     <mat-radio-button
       id="{{ planetInstance }}_shuttle_2"
       value="{{ planetInstance }}_shuttle_2"
       [disabled]="disableVehicleCount(allVehicles.shuttle, 2)"
-      >{{staticContent.planetShipSelector.spaceShuttle}} ({{ allVehicles.shuttle }})</mat-radio-button
+      >{{ staticContent.planetShipSelector.spaceShuttle }} ({{
+        allVehicles.shuttle
+      }})</mat-radio-button
     >
     <mat-radio-button
       id="{{ planetInstance }}_ship_3"
       value="{{ planetInstance }}_ship_3"
       [disabled]="disableVehicleCount(allVehicles.ship, 3)"
-      >{{staticContent.planetShipSelector.spaceShip}} ({{ allVehicles.ship }})</mat-radio-button
+      >{{ staticContent.planetShipSelector.spaceShip }} ({{
+        allVehicles.ship
+      }})</mat-radio-button
     >
   </mat-radio-group>
   <!-- Table to display speed, time taken -->
-  <table [class.invisible]="!(vehicleSpeed && timeTaken)" class="table table-sm table-dark col-10 ">
+  <table
+    [class.invisible]="!(vehicleSpeed && timeTaken)"
+    class="table table-sm table-dark col-10 "
+  >
     <tr>
-      <th>{{staticContent.planetShipSelector.vehicleSpeed}}</th>
+      <th>{{ staticContent.planetShipSelector.vehicleSpeed }}</th>
       <td>{{ vehicleSpeed }}</td>
     </tr>
     <tr>
-      <th>{{staticContent.planetShipSelector.timeTaken}}</th>
+      <th>{{ staticContent.planetShipSelector.timeTaken }}</th>
       <td>{{ timeTaken }}</td>
     </tr>
   </table>

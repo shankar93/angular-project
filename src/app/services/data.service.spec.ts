@@ -3,12 +3,22 @@ import { XHRBackend } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 import { DataService } from './data.service';
 import { AppModule } from '../app.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { retry, catchError } from 'rxjs/operators';
+import { HttpErrorInterceptor } from '../interceptors/http-error.interceptor';
 
 describe('DataService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       imports: [AppModule],
-      providers: [{ provide: XHRBackend, useClass: MockBackend }]
+      providers: [
+        { provide: XHRBackend, useClass: MockBackend },
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: HttpErrorInterceptor,
+          multi: true
+        }
+      ]
     })
   );
 
@@ -31,11 +41,7 @@ describe('DataService', () => {
     const getToken = service.getToken();
     expect(getToken);
   });
-  fit('launchVehiclesApi', () => {
-    const service: DataService = TestBed.get(DataService);
-    const launchVehiclesApi = service.launchVehiclesApi();
-    expect(launchVehiclesApi);
-  });
+
   fit('successTimeTaken', () => {
     const service: DataService = TestBed.get(DataService);
     service.findFalconeRequestBody.planet_names = [
@@ -48,19 +54,4 @@ describe('DataService', () => {
     const successTimeTaken = service.successTimeTaken();
     expect(successTimeTaken);
   });
-  /* fit('planetFetch', () => {
-    inject([DataService, XHRBackend], (dataService, mockBackend) => {
-      const mockResponse = {
-        planet_name: 'Donlon',
-        status: 'success'
-      };
-      mockBackend.connections.subscribe(connection => {
-        connection.mockRespond(mockResponse);
-      });
-      dataService.planetFetch.subscribe(data => {
-        expect(data.length).toBe(6);
-        expect(data[0].name).toBe('Donlon');
-      });
-    });
-  }); */
 });

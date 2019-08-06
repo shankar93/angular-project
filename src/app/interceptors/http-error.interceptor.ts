@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import {
   HttpEvent,
   HttpInterceptor,
@@ -9,8 +10,9 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { NotifierService } from 'angular-notifier';
-import { Injectable } from '@angular/core';
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(private notifier: NotifierService) {}
   intercept(

@@ -27,8 +27,10 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
   fit('reset function called', () => {
+    spyOn(dataService, 'reset').and.callThrough();
+    spyOn(dataService, 'duplicateNavigation').and.callThrough();
     component.reset();
-    expect(dataService.selectedPlanetsData[0].Donlon).toEqual(false);
-    expect(dataService.disableLaunchButton).toEqual(true);
+    expect(dataService.reset).toHaveBeenCalled();
+    expect(dataService.duplicateNavigation).toHaveBeenCalled();
   });
 });

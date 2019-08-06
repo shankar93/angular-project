@@ -25,17 +25,6 @@ describe('ResultComponent', () => {
     fixture = TestBed.createComponent(ResultComponent);
     component = fixture.componentInstance;
     service = fixture.debugElement.injector.get(DataService);
-    /* const mockHeader = document.createElement('div');
-    mockHeader.id = 'header';
-    document.getElementById = jasmine
-      .createSpy('header')
-      .and.returnValue(mockHeader);
-    const mockFooter = document.createElement('div');
-    mockFooter.id = 'footer';
-    document.getElementById = jasmine
-      .createSpy('footer')
-      .and.returnValue(mockFooter); */
-
     const elementsObj = {};
     function elementCreator(element) {
       document.getElementById = jasmine
@@ -50,14 +39,13 @@ describe('ResultComponent', () => {
     }
     elementCreator('header');
     elementCreator('footer');
-    /* elementCreator('result');
-    elementCreator('opac'); */
+    elementCreator('result');
+    elementCreator('opac');
     fixture.detectChanges();
 
   });
 
   fit('should create', () => {
-    component.ngAfterViewInit();
     expect(component).toBeTruthy();
   });
   fit('responsive function called', () => {
@@ -69,9 +57,8 @@ describe('ResultComponent', () => {
     const reset = component.reset();
     expect(reset);
   });
-  fit('get timeTaken from service', fakeAsync(() => {
+  fit('get timeTaken from service', () => {
     service.timeTaken = 100;
-    tick();
     expect(service.timeTaken).toEqual(100);
-  }));
+  });
 });
