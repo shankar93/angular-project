@@ -1,0 +1,80 @@
+{
+  "configVersion": 1,
+  "timestamp": 1596131873240,
+  "index": "https://shankar-kruthiventi.github.io/Finding-Falcon/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/favicon.ico",
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/index.html",
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/main.275759bd1ce07ea569f0.js",
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/polyfills.7037a817a5bb670ed2ca.js",
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/runtime.ec2944dd8b20ec099bf3.js",
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/scripts.6cf4da7113bcd1218d80.js",
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/styles.2d330ff05f5d30ff36f2.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/icons/icon-128x128.png",
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/icons/icon-144x144.png",
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/icons/icon-152x152.png",
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/icons/icon-192x192.png",
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/icons/icon-384x384.png",
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/icons/icon-512x512.png",
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/icons/icon-72x72.png",
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/icons/icon-96x96.png",
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/images/geektrust.jpg",
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/images/space.jpg",
+        "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/jsons/staticContent.json"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/icons/icon-128x128.png": "fb7493ae4bd6061926e98ea6f6511d3262239ed2",
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/icons/icon-144x144.png": "92cbff4153cd7cc8d4409e4268d4951bb48d0fd0",
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/icons/icon-152x152.png": "c185d4e02c2e3ea2e7214ffb055359fcfe2ba431",
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/icons/icon-192x192.png": "37ac469e5386855d8e8262193705885665931d01",
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/icons/icon-384x384.png": "a6e6f28916ef7d702dc293a61ebc2aebf7a6edae",
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/icons/icon-512x512.png": "607c9fbf2076cd1251d8bb2ea78910ce90d2483b",
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/icons/icon-72x72.png": "0d0d4f864d7dec80c02399eb1028412cf2c08257",
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/icons/icon-96x96.png": "cfe64afb12431d57d1a589f5555d089feb77930e",
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/images/geektrust.jpg": "3f49908e2628ca7e2863925cb7e0fb147dd3604b",
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/images/space.jpg": "a242f035f5f84dbd098f8b97665178d082deafd6",
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/assets/jsons/staticContent.json": "571b22d1f10c45d0223ce01b6f8dfbe883142413",
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/index.html": "522673eb3ce6a9a7796d60b27c776eaa55b30ae6",
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/main.275759bd1ce07ea569f0.js": "ca68f6f812aeae7669d38bfdb70176b603776cc7",
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/polyfills.7037a817a5bb670ed2ca.js": "6946e10a03311677a01490b8e91741668e64e17e",
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/runtime.ec2944dd8b20ec099bf3.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/scripts.6cf4da7113bcd1218d80.js": "1d15349845f9ccc93fbc16d4ecb6a123e715f3ee",
+    "https://shankar-kruthiventi.github.io/Finding-Falcon/styles.2d330ff05f5d30ff36f2.css": "b5d769ee0c5120a428c4c21b74b1939e4f4f098b"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}

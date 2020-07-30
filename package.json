@@ -30,6 +30,7 @@
     "jquery": "^3.4.1",
     "ngx-pwa-icons": "^0.1.2",
     "ngx-spinner": "^2.0.1",
+    "node-sass": "^4.14.1",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.5.2",
     "zone.js": "~0.8.26"
